@@ -196,12 +196,18 @@ function WelcomeDidPage() {
 		
 		
 						const value = await decryptVerifiableCredential(res2.decoded.output.value, keys.secret);
+
+						let resStatus;
 		
-						console.log(JSON.parse(value.vc).credentialStatus.id);
+						try{
+							console.log(JSON.parse(value.vc).credentialStatus.id);
 
-						const resStatus = await resolveStatus(JSON.parse(value.vc).credentialStatus.id, client);
+							resStatus = await resolveStatus(JSON.parse(value.vc).credentialStatus.id, client);
 
-						console.log(resStatus);
+							console.log(resStatus);
+						} catch {
+							resStatus = null;
+						}
 						
 						// tempArrVc.push("");
 						tempVCList.push({
