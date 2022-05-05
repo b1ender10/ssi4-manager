@@ -251,7 +251,7 @@ function PageVP() {
 
 	async function downloadVC(vc) {
 
-        vc = JSON.stringify(vc);
+        vc = JSON.stringify(vc,null,2);
 
 		let fileName = "VP.json";
 		let fileType = "text/json";

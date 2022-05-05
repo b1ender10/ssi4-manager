@@ -25,7 +25,7 @@ function Header() {
 						</a>
 
 						<span>
-							DID management technical interface
+							DID management demo interface
 						</span>
 
 						<Switch>

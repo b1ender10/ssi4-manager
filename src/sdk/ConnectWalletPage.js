@@ -750,7 +750,7 @@ function ConnectWalletPage() {
 					</button>
 
 					<button className="connect-btn zeropage-btn" onClick={connectWallet}>
-						Connect TON Ever Wallet
+						Connect Ever Wallet
 					</button>
 				</div>
 			</div>
