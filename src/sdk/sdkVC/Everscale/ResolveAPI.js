@@ -1,23 +1,23 @@
 const { Account } = require('@eversdk/appkit');
 const { TonClient, signerKeys, signerNone } = require('@eversdk/core')
 
-// const { ResolveContract } = require('../../build/ResolveContract')
+const { ResolveContract } = require('../../contracts/vc/ResolveContract')
 
 module.exports = {
 
-    // createAccountResolve: async (address, client) => {
-    //     return new Promise(async (resolve, reject) => {
-    //         try {
-    //             resolve(new Account(ResolveContract, {
-    //                     address: address,
-    //                     signer: signerNone(),
-    //                     client: client
-    //                 }))
-    //         } catch(er) {
-    //             reject(er)
-    //         }
-    //     })
-    // },
+    createAccountResolve: async (address, client) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(new Account(ResolveContract, {
+                        address: address,
+                        signer: signerNone(),
+                        client: client
+                    }))
+            } catch(er) {
+                reject(er)
+            }
+        })
+    },
 
     resolveCodeHashIndexVC: async (ResolveAccount, addressOwner) => {
         return new Promise(async (resolve, reject) => {

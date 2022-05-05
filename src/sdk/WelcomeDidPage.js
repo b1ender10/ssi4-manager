@@ -120,7 +120,7 @@ function WelcomeDidPage() {
 		// console.log(result);
 
 		result.then(async (data)=>{
-			// console.log(data);
+			console.log(data);
 
 			
 			const Datas = await client.net.query_collection({
@@ -131,7 +131,7 @@ function WelcomeDidPage() {
 				result: "id",
 			});
 
-			// console.log(Datas);
+			console.log(Datas);
 
 			let tempVCList = [];
 
@@ -156,6 +156,8 @@ function WelcomeDidPage() {
 			setTimeout(async ()=>{
 				for (let i = 0; i < Datas.result.length; i++) {
 
+					console.log(i);
+
 					let uniq = true;
 	
 					for (let k = 0; k < tempVCList.length; k++) {
@@ -176,13 +178,15 @@ function WelcomeDidPage() {
 
 						
 		
-						// console.log(res);
+						console.log(res);
 		
 						const tempAccVC = new Account(VCContract, {
 							address: res.decoded.output.addrVC,
 							signer: signerNone(),
 							client,
 						});
+
+						console.log(tempAccVC);
 		
 						const res2 = await tempAccVC.runLocal("getInfo", {});
 
@@ -194,7 +198,8 @@ function WelcomeDidPage() {
 		
 						const keys = await getClientKeys(seed);
 		
-		
+						console.log(keys);
+
 						const value = await decryptVerifiableCredential(res2.decoded.output.value, keys.secret);
 
 						let resStatus;
@@ -207,6 +212,7 @@ function WelcomeDidPage() {
 							console.log(resStatus);
 						} catch {
 							resStatus = null;
+							console.log(resStatus);
 						}
 						
 						// tempArrVc.push("");
@@ -216,7 +222,7 @@ function WelcomeDidPage() {
 							"addrIndVC": Datas.result[i].id,
 							"vc": value.vc,
 							"status": resStatus,
-							"statusAddress": JSON.parse(value.vc).credentialStatus.id,
+							"statusAddress": resStatus,
 							"onVcArr": false,
 						});
 	
@@ -321,7 +327,7 @@ function WelcomeDidPage() {
 			client,
 		});
 
-		const res = await deactivate("0:e350931ed3279ea3c864b60730312eb53a8d15f1c5c2ef5634977c36fa5fda87", acc);
+		const res = await deactivate(addr, acc);
 
 		console.log(res);
 
@@ -417,6 +423,7 @@ function WelcomeDidPage() {
 				const valueCrypt = encryptVerifiableCredential(vc, keys.secret);
 
 				valueCrypt.then((dataValue)=>{
+					console.log(sessionStorage.getItem("address"));
 					const transRes = deployVC(data.address, data.keys, client, sessionStorage.getItem("address"), "json", dataValue);
 
 					transRes.then((data)=>{
